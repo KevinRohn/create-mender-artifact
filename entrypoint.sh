@@ -59,8 +59,8 @@ done
 echo "$PACKAGES" | sed -e 's/ / -f /g'
 
 /bin/mender-artifact write module-image \
-  --artifact-name ${ARTIFACT_NAME} \
-  --type ${TYPE} \
-  --device-type ${DEVICE_TYPE} \
-  --output-path ${OUTPUT_PATH} \
+  --artifact-name "${ARTIFACT_NAME}" \
+  --type "${TYPE}" \
+  --device-type "${DEVICE_TYPE}" \
+  --output-path "${OUTPUT_PATH}" \
   --file $(echo "$PACKAGES" | sed -e 's/ / -f /g')
