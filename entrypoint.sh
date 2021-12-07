@@ -58,8 +58,10 @@ for PACKAGE in $(ls $ARTIFACT_CONTENT/*.deb); do
   PACKAGES="${PACKAGES} $PACKAGE"
 done
 
+echo "$PACKAGES" | sed -e 's/ / -f /g'
+
 echo "START"
 
-mender-artifact write module-image -T "${TYPE}" -n "${ARTIFACT_NAME}" -t "${DEVICE_TYPE}" -o "${OUTPUT_PATH}" -f $(echo "$PACKAGES" | sed -e 's/ / -f /g')
+mender-artifact write module-image -T "${TYPE}" -n "${ARTIFACT_NAME}" -t "${DEVICE_TYPE}" -o "${OUTPUT_PATH}" $(echo "$PACKAGES" | sed -e 's/ / -f /g')
 ls -la
 echo "END"
