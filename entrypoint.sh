@@ -13,7 +13,7 @@ else
 
   ARTIFACT_CONTENT=$4
   if [ -d "$ARTIFACT_CONTENT" ]; then
-    echo "Output scripts $ARTIFACT_CONTENT path is set for mender-artifact creation."
+    echo "Artifact content $ARTIFACT_CONTENT path is set for mender-artifact creation."
     true
   else
     echo "Error: $ARTIFACT_CONTENT path does not exist."
@@ -30,8 +30,7 @@ else
   fi
 fi
 
-echo $6
-if [ -z "$6" ]; then
+if [ ! -z "$6" ]; then
   STATE_SCRIPTS=$6
   if [ -d "$STATE_SCRIPTS" ]; then
     echo "State scripts $STATE_SCRIPTS path is set for mender-artifact creation."
@@ -42,12 +41,12 @@ if [ -z "$6" ]; then
   fi
 fi
 
-if [ -z "$7" ]; then
+if [ ! -z "$7" ]; then
   SOFTWARE_NAME=$7
   echo "Software name $SOFTWARE_NAME is set for mender-artifact creation."
 fi
 
-if [ -z "$8" ]; then
+if [ ! -z "$8" ]; then
   SOFTWARE_VERSION=$8
   echo "Software version $SOFTWARE_VERSION is set for mender-artifact creation."
 fi
