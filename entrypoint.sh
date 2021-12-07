@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh -l
 
 if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ]; then
   echo 'Please provide all required variables'
