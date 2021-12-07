@@ -52,7 +52,7 @@ if [ ! -z "$8" ]; then
 fi
 
 /bin/mender-artifact > file.txt
-cat file.txt
+echo "$(cat file.txt)
 
 #s/bin/mender-artifact write module-image \
 #s  --artifact-name $(echo "$ARTIFACT_NAME") \
