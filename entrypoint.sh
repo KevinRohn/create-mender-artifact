@@ -60,7 +60,7 @@ check_dependency() {
   fi
 }
 
-if ! check_dependency /opt/mender-artifact; then
+if ! check_dependency mender-artifact; then
   echo "Please follow the instructions here to install mender-artifact and then try again: https://docs.mender.io/downloads#mender-artifact" 1>&2
   exit 1
 fi
@@ -69,10 +69,8 @@ fi
 ls -lah 
 echo "START"
 
-/opt/mender-artifact write module-image | xargs echo -n
-
 #mender-artifact write module-image -T "${TYPE}" -n "${ARTIFACT_NAME}" -t "${DEVICE_TYPE}" -o "${OUTPUT_PATH}" -f $(echo "$PACKAGES" | sed -e 's/ / -f /g')
 #mender-artifact write module-image -T "deb" -n "test" -t "raspberrypi3" -o "myupdate.mender" -f "content/nano_3.2-3_armhf.deb" | xargs echo -n
-#echo -n `./mender-artifact write module-image`
-#./mender-artifact write module-image | xargs echo -n
+echo -n `./mender-artifact write module-image`
+mender-artifact write module-image | xargs echo -n
 #echo "END"
