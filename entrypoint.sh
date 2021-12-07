@@ -53,30 +53,32 @@ if [ ! -z "$8" ]; then
   echo "Software version $SOFTWARE_VERSION is set for mender-artifact creation."
 fi
 
-PACKAGES=
-for PACKAGE in $(ls $ARTIFACT_CONTENT/*.deb); do
-  PACKAGES="${PACKAGES} $PACKAGE"
-done 
+MENDER_ARTIFACT_VERSION=$9
 
-echo "$PACKAGES" | sed -e 's/ / -f /g'
+install_mender_artifact() {
+  curl https://downloads.mender.io/mender-artifact/$MENDER_ARTIFACT_VERSION/linux/mender-artifact --output /bin/mender-artifact
+  chmod a+x /bin/mender-artifact
 
-#check_dependency() {
-#  if ! which "$1" > /dev/null; then
-#    echo "The $1 utility is not found but required to generate Artifacts." 1>&2
-#    return 1
-#  fi
-#}
-#
-#if ! check_dependency mender-artifact; then
-#  echo "Please follow the instructions here to install mender-artifact and then try again: https://docs.mender.io/downloads#mender-artifact" 1>&2
-#  exit 1
-#else 
-#  echo "Found mender-artifact installation"
-#fi 
+  echo "Installed mender-artifact version: $MENDER_ARTIFACT_VERSION"
 
-MENDER-ARTIFACT-VERSION=3.6.1
-curl https://downloads.mender.io/mender-artifact/3.6.1/linux/mender-artifact
-chmod a+x mender-artifact
+}
+
+install_mender_artifact
+
+check_dependency() {
+  if ! which "$1" > /dev/null; then
+    echo "The $1 utility is not found but required to generate Artifacts." 1>&2
+    return 1
+  fi
+}
+
+if ! check_dependency mender-artifact; then
+  echo "Please follow the instructions here to install mender-artifact and then try again: https://docs.mender.io/downloads#mender-artifact" 1>&2
+  exit 1
+else 
+  echo "Found mender-artifact installation"
+fi 
+
 
 ls -lah $ARTIFACT_CONTENT/
 echo "START"
