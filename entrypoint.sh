@@ -4,7 +4,7 @@ set -e
 
 if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ]; then
   echo "Please provide all required variables"
-  exit 1;
+  exit 1
 else
   ARTIFACT_NAME=$1
   echo "Artifact name $ARTIFACT_NAME is set for mender-artifact creation."
@@ -19,7 +19,7 @@ else
     true
   else
     echo "Error: $ARTIFACT_CONTENT path does not exist."
-    exit 1;
+    exit 1
   fi
 
   OUTPUT_PATH=$5
@@ -28,7 +28,7 @@ else
     true
   else
     echo "Error: $OUTPUT_PATH path does not exist."
-    exit 1;
+    exit 1
   fi
 fi
 
@@ -39,7 +39,7 @@ if [ ! -z "$6" ]; then
     true
   else
     echo "Error: $STATE_SCRIPTS path does not exist."
-    exit 1;
+    exit 1
   fi
 fi
 
@@ -53,13 +53,13 @@ if [ ! -z "$8" ]; then
   echo "Software version $SOFTWARE_VERSION is set for mender-artifact creation."
 fi
 
-ls -lah 
+PACKAGES=
+for PACKAGE in $(ls $ARTIFACT_CONTENT/*.deb); do
+  PACKAGES="${PACKAGES} $PACKAGE"
+done
 
 echo "START"
 
-mender-artifact write module-image -T "${TYPE}" -n "${ARTIFACT_NAME}" -t "${DEVICE_TYPE}" -o "${OUTPUT_PATH}" -f "$(echo "$PACKAGES" | sed -e 's/ / -f /g')"
-#mender-artifact write module-image -T "deb" -n "test" -t "raspberrypi3" -o "myupdate.mender" -f "content/nano_3.2-3_armhf.deb"
-#echo -n `mender-artifact write module-image`
-#mender-artifact write module-image | xargs echo -n
+mender-artifact write module-image -T "${TYPE}" -n "${ARTIFACT_NAME}" -t "${DEVICE_TYPE}" -o "${OUTPUT_PATH}" -f $(echo "$PACKAGES" | sed -e 's/ / -f /g')
 ls -la
 echo "END"
