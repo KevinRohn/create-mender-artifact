@@ -61,4 +61,5 @@ echo "START"
 mender-artifact write module-image -T "deb" -n "test" -t "raspberrypi3" -o "myupdate.mender" -f "content/nano_3.2-3_armhf.deb"
 #echo -n `mender-artifact write module-image`
 #mender-artifact write module-image | xargs echo -n
-#echo "END"
+ls -la
+echo "END"
