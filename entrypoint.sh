@@ -13,7 +13,7 @@ else
 
   ARTIFACT_CONTENT=$4
   if [ -d "$ARTIFACT_CONTENT" ]; then
-    echo "State scripts $ARTIFACT_CONTENT path is set for mender-artifact creation."
+    echo "Output scripts $ARTIFACT_CONTENT path is set for mender-artifact creation."
     true
   else
     echo "Error: $ARTIFACT_CONTENT path does not exist."
@@ -30,6 +30,7 @@ else
   fi
 fi
 
+echo $6
 if [ -z "$6" ]; then
   STATE_SCRIPTS=$6
   if [ -d "$STATE_SCRIPTS" ]; then
@@ -56,4 +57,3 @@ fi
   --type $(echo "$TYPE") \
   --device-type $(echo "$DEVICE_TYPE") \
   --output-path $(echo "$OUTPUT_PATH") \
-  
