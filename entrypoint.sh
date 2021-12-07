@@ -60,7 +60,7 @@ check_dependency() {
   fi
 }
 
-if ! check_dependency mender-artifact; then
+if ! check_dependency /opt/mender-artifact; then
   echo "Please follow the instructions here to install mender-artifact and then try again: https://docs.mender.io/downloads#mender-artifact" 1>&2
   exit 1
 fi
