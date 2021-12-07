@@ -51,8 +51,16 @@ if [ ! -z "$8" ]; then
   echo "Software version $SOFTWARE_VERSION is set for mender-artifact creation."
 fi
 
+PACKAGES=
+for PACKAGE in $(ls $ARTIFACT_CONTENT/*.deb); do
+  PACKAGES="${PACKAGES} $PACKAGE"
+done 
+
+echo "$PACKAGES" | sed -e 's/ / -f /g'
+
 /bin/mender-artifact write module-image \
   --artifact-name ${ARTIFACT_NAME} \
   --type ${TYPE} \
   --device-type ${DEVICE_TYPE} \
-  --output-path ${OUTPUT_PATH} 
+  --output-path ${OUTPUT_PATH} \
+  --file $(echo "$PACKAGES" | sed -e 's/ / -f /g')
