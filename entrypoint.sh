@@ -59,6 +59,6 @@ for PACKAGE in $(ls $ARTIFACT_CONTENT/*.deb); do
 done 
 
 echo "$PACKAGES" | sed -e 's/ / -f /g'
-
+echo "HELLO"
 #mender-artifact write module-image -T "${TYPE}" -n "${ARTIFACT_NAME}" -t "${DEVICE_TYPE}" -o "${OUTPUT_PATH}" -f $(echo "$PACKAGES" | sed -e 's/ / -f /g')
 mender-artifact write module-image -T deb -n test -t raspberrypi3 -o myupdate.mender -f content/nano_3.2-3_armhf.deb
