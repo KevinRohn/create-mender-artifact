@@ -1,6 +1,6 @@
 #!/bin/sh -l
 
-echo ${INPUT_device-type}
+echo $INPUT_DEVICE-TYPE
 
 #if [ -z "${INPUT_artifact-name}" ] || [ -z "${device-type}" ] || [ -z "${type}" ] || [ -z "${artifact-content}" ] || [ -z "${output-path}" ]; then
 #  echo "Please provide all required variables"
