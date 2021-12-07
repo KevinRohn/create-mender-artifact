@@ -53,25 +53,16 @@ if [ ! -z "$8" ]; then
   echo "Software version $SOFTWARE_VERSION is set for mender-artifact creation."
 fi
 
-check_dependency() {
-  if ! which "$1" > /dev/null; then
-    echo "The $1 utility is not found but required to generate Artifacts." 1>&2
-    return 1
-  fi
-}
+MENDER_ARTIFACT_VERSION=$9
+curl https://downloads.mender.io/mender-artifact/${MENDER_ARTIFACT_VERSION}/linux/mender-artifact --output mender-artifact
+chmod a+x mender-artifact
 
-if ! check_dependency mender-artifact; then
-  echo "Please follow the instructions here to install mender-artifact and then try again: https://docs.mender.io/downloads#mender-artifact" 1>&2
-  exit 1
-else 
-  echo "Found mender-artifact installation"
-fi 
-
+echo $MENDER_ARTIFACT_VERSION
 
 ls -lah $ARTIFACT_CONTENT/
 echo "START"
 #mender-artifact write module-image -T "${TYPE}" -n "${ARTIFACT_NAME}" -t "${DEVICE_TYPE}" -o "${OUTPUT_PATH}" -f $(echo "$PACKAGES" | sed -e 's/ / -f /g')
 #mender-artifact write module-image -T "deb" -n "test" -t "raspberrypi3" -o "myupdate.mender" -f "content/nano_3.2-3_armhf.deb" | xargs echo -n
-echo -n `mender-artifact write module-image`
-mender-artifact write module-image | xargs echo -n
+echo -n `./mender-artifact write module-image`
+./mender-artifact write module-image | xargs echo -n
 echo "END"

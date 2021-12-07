@@ -33,6 +33,11 @@ inputs:
     description: 'Value for the software version, defaults to the name of the artifact'
     required: false
 
+  mender-artifact-version:
+    description: 'The version of the mender-artifact file.'
+    required: false
+    default: 3.6.1
+
   
 outputs:
   time: # id of output
@@ -50,6 +55,7 @@ runs:
     - ${{ inputs.state-scripts }}
     - ${{ inputs.software-name }}
     - ${{ inputs.software-version }}
+    - ${{ inputs.mender-artifact-version }}
 
 branding:
   icon: 'package'
