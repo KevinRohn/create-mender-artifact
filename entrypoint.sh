@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/bin/sh
+
+set -e
 
 if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ]; then
   echo "Please provide all required variables"
@@ -58,9 +60,9 @@ done
 
 echo "$PACKAGES" | sed -e 's/ / -f /g'
 
-/bin/mender-artifact write module-image \
+mender-artifact write module-image \
   --artifact-name "${ARTIFACT_NAME}" \
   --type "${TYPE}" \
   --device-type "${DEVICE_TYPE}" \
   --output-path "${OUTPUT_PATH}" \
-  --file $(echo "$PACKAGES" | sed -e 's/ / -f /g')
+  --file $(echo "$PACKAGES" | sed -e 's/ / -f /g') > file
