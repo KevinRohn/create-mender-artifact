@@ -51,11 +51,8 @@ if [ ! -z "$8" ]; then
   echo "Software version $SOFTWARE_VERSION is set for mender-artifact creation."
 fi
 
-/bin/mender-artifact > file.txt
-echo "$(cat file.txt)
-
-#s/bin/mender-artifact write module-image \
-#s  --artifact-name $(echo "$ARTIFACT_NAME") \
-#s  --type $(echo "$TYPE") \
-#s  --device-type $(echo "$DEVICE_TYPE") \
-#s  --output-path $(echo "$OUTPUT_PATH") 
+/bin/mender-artifact write module-image \
+  --artifact-name ${ARTIFACT_NAME} \
+  --type ${TYPE} \
+  --device-type ${DEVICE_TYPE} \
+  --output-path ${OUTPUT_PATH} 
