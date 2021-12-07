@@ -41,6 +41,15 @@ outputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  args:
+    - ${{ inputs.artifact-name }}
+    - ${{ inputs.device-type }}
+    - ${{ inputs.type }}
+    - ${{ inputs.artifact-content }}
+    - ${{ inputs.output-path }}
+    - ${{ inputs.state-scripts }}
+    - ${{ inputs.software-name}}
+    - ${{ inputs.software-version}}
 
 branding:
   icon: 'package'
