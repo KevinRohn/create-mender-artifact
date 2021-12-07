@@ -8,6 +8,7 @@ RUN apk add --no-cache curl
 
 RUN curl https://downloads.mender.io/mender-artifact/${MENDER-ARTIFACT-VERSION}/linux/mender-artifact --output /bin/mender-artifact
 RUN chmod a+x /bin/mender-artifact
-RUN chmod +x entrypoint.sh
+
 COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
