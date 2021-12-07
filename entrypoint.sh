@@ -70,10 +70,9 @@ check_dependency() {
 if ! check_dependency mender-artifact; then
   echo "Please follow the instructions here to install mender-artifact and then try again: https://docs.mender.io/downloads#mender-artifact" 1>&2
   exit 1
-  else 
+else 
   echo "Found mender-artifact installation"
-  fi 
-fi
+fi 
 
 ls -lah $ARTIFACT_CONTENT/
 echo "START"
