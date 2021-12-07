@@ -53,18 +53,6 @@ if [ ! -z "$8" ]; then
   echo "Software version $SOFTWARE_VERSION is set for mender-artifact creation."
 fi
 
-MENDER_ARTIFACT_VERSION=$9
-
-install_mender_artifact() {
-  curl https://downloads.mender.io/mender-artifact/$MENDER_ARTIFACT_VERSION/linux/mender-artifact --output /bin/mender-artifact
-  chmod a+x /bin/mender-artifact
-
-  echo "Installed mender-artifact version: $MENDER_ARTIFACT_VERSION"
-
-}
-
-install_mender_artifact
-
 check_dependency() {
   if ! which "$1" > /dev/null; then
     echo "The $1 utility is not found but required to generate Artifacts." 1>&2
