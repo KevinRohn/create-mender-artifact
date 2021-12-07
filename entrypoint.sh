@@ -53,17 +53,17 @@ if [ ! -z "$8" ]; then
   echo "Software version $SOFTWARE_VERSION is set for mender-artifact creation."
 fi
 
-check_dependency() {
-  if ! which "$1" > /dev/null; then
-    echo "The $1 utility is not found but required to generate Artifacts." 1>&2
-    return 1
-  fi
-}
-
-if ! check_dependency mender-artifact; then
-  echo "Please follow the instructions here to install mender-artifact and then try again: https://docs.mender.io/downloads#mender-artifact" 1>&2
-  exit 1
-fi
+#check_dependency() {
+#  if ! which "$1" > /dev/null; then
+#    echo "The $1 utility is not found but required to generate Artifacts." 1>&2
+#    return 1
+#  fi
+#}
+#
+#if ! check_dependency mender-artifact; then
+#  echo "Please follow the instructions here to install mender-artifact and then try again: https://docs.mender.io/downloads#mender-artifact" 1>&2
+#  exit 1
+#fi
 
 
 ls -lah 
