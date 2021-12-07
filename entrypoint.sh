@@ -60,4 +60,4 @@ done
 
 echo "$PACKAGES" | sed -e 's/ / -f /g'
 
-mender-artifact write module-image --artifact-name "${ARTIFACT_NAME}" --type "${TYPE}" --device-type "${DEVICE_TYPE}" --output-path "${OUTPUT_PATH}" --file $(echo "$PACKAGES" | sed -e 's/ / -f /g')
+mender-artifact write module-image -T "${TYPE}" -n "${ARTIFACT_NAME}" -t "${DEVICE_TYPE}" -o "${OUTPUT_PATH}" -f $(echo "$PACKAGES" | sed -e 's/ / -f /g')
