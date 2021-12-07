@@ -1,0 +1,47 @@
+name: 'Create Mender artifact module-image'
+description: 'Create an mender artifact file'
+inputs:
+  artifact-name: 
+    description: 'Name of the artifact'
+    required: true
+
+  device-type:
+    description: 'Type of device(s) supported by the Artifact. You can specify multiple compatible devices providing this parameter multiple times.'
+    required: true
+
+  type: 
+    description: 'Type of payload. This is the same as the name of the update modul'
+    required: true
+
+  artifact-content:
+    description: 'Content for the artifact payload, based on the payload type'
+    required: true
+
+  output-path: 
+    description: 'Full path to output artifact file.'
+    required: true
+
+  state-scripts:
+    description: 'Full path to the state script(s). You can specify multiple scripts providing this parameter multiple times.'
+    required: false
+  
+  software-name:
+    description: 'Name of the key to store the software version: rootfs-image.NAME.version, instead of rootfs-image.PAYLOAD_TYPE.version'
+    required: false
+
+  software-version:
+    description: 'Value for the software version, defaults to the name of the artifact'
+    required: false
+
+  
+outputs:
+  time: # id of output
+    description: 'The time we greeted you'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+
+branding:
+  icon: 'package'
+  color: 'green'
