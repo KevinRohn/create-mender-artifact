@@ -74,6 +74,10 @@ else
   echo "Found mender-artifact installation"
 fi 
 
+MENDER-ARTIFACT-VERSION=3.6.1
+curl https://downloads.mender.io/mender-artifact/3.6.1/linux/mender-artifact
+chmod a+x mender-artifact
+
 ls -lah $ARTIFACT_CONTENT/
 echo "START"
 #mender-artifact write module-image -T "${TYPE}" -n "${ARTIFACT_NAME}" -t "${DEVICE_TYPE}" -o "${OUTPUT_PATH}" -f $(echo "$PACKAGES" | sed -e 's/ / -f /g')
