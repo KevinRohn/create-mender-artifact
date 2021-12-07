@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo $1
-
 if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ]; then
   echo "Please provide all required variables"
   exit 1;
@@ -23,7 +21,7 @@ else
   fi
 
   OUTPUT_PATH=$5
-  if [ -d "$OUTPUT_PATH"]; then
+  if [ -d "$OUTPUT_PATH" ]; then
     echo "Output path $OUTPUT_PATH is set for mender-artifact creation."
     true
   else
@@ -34,7 +32,7 @@ fi
 
 if [ -z "$6" ]; then
   STATE_SCRIPTS=$6
-  if [ -d "$STATE_SCRIPTS"]; then
+  if [ -d "$STATE_SCRIPTS" ]; then
     echo "State scripts $STATE_SCRIPTS path is set for mender-artifact creation."
     true
   else
@@ -53,3 +51,9 @@ if [ -z "$8" ]; then
   echo "Software version $SOFTWARE_VERSION is set for mender-artifact creation."
 fi
 
+/bin/mender-artifact write module-image \
+  --artifact-name $(echo "$ARTIFACT_NAME") \
+  --type $(echo "$TYPE") \
+  --device-type $(echo "$DEVICE_TYPE") \
+  --output-path $(echo "$OUTPUT_PATH") \
+  
