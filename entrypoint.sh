@@ -60,12 +60,17 @@ done
 
 echo "$PACKAGES" | sed -e 's/ / -f /g'
 
-ls -la
+ls -lah
 #mender-artifact write module-image -T ${TYPE} -n ${ARTIFACT_NAME} -t ${DEVICE_TYPE} -o ${OUTPUT_PATH} $(echo "$PACKAGES" | sed -e 's/ / -f /g')
+
+mender-artifact write module-image -T deb -n test-artifact -t raspberrypi3 -o out -f content/nano_3.2-3_armhf.deb
+
+ls -lah
 
 mender-artifact write module-image -T ${TYPE} -n ${ARTIFACT_NAME} -t ${DEVICE_TYPE} -o ${OUTPUT_PATH} -f content/nano_3.2-3_armhf.deb
 
 #$(echo "$PACKAGES" | sed -e 's/ / -f /g')
 #mender-artifact write module-image -T ${TYPE} -n ${ARTIFACT_NAME} -t ${DEVICE_TYPE} -o ${OUTPUT_PATH} $(echo "$PACKAGES" | sed -e 's/ / -f /g')
-ls -la
+
+ls -lah
 echo "END"
