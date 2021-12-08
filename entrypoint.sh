@@ -102,6 +102,7 @@ check_device_type() {
     done
     echo "$(echo "$DEVICE_TYPES" | sed -e 's/ / --device-type /g')"
   else
+    echo "THERE"
     echo "--device-type $(echo $DEVICE_TYPE)"
   fi
 }
