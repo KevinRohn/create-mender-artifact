@@ -64,7 +64,7 @@ for SCRIPT in $(ls $STATE_SCRIPTS/*); do
 done
 
 mender-artifact write module-image \ 
-  --type-value ${TYPE} \
+  --type ${TYPE} \
   --artifact-name ${ARTIFACT_NAME} \
   --device-type ${DEVICE_TYPE} \
   --output-path ${OUTPUT_PATH}/${ARTIFACT_NAME}.mender \
