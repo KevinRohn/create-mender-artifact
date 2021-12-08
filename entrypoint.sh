@@ -95,16 +95,18 @@ check_sw_version() {
 sw_name=$(check_sw_name)
 sw_version=$(check_sw_version)
 
-echo $sw_name
-echo $sw_version
-
 mender-artifact write module-image $(echo "$PACKAGES" | sed -e 's/ / -f /g') $(echo "$SCRIPTS" | sed -e 's/ / -f /g') ${sw_name} ${sw_version} \
   --type ${TYPE} \
   --artifact-name ${ARTIFACT_NAME} \
   --device-type ${DEVICE_TYPE} \
   --output-path ${OUTPUT_PATH}/${ARTIFACT_NAME}.mender
 
-echo "Artifact ${OUTPUT_PATH}/${ARTIFACT_NAME}.mender generated successfully:"
-mender-artifact read ${OUTPUT_PATH}/${ARTIFACT_NAME}.mender
-
-exit 0;
+if [ -f "${OUTPUT_PATH}/${ARTIFACT_NAME}.mender" ]; then
+  echo "Artifact ${OUTPUT_PATH}/${ARTIFACT_NAME}.mender generated successfully:"
+  mender-artifact read ${OUTPUT_PATH}/${ARTIFACT_NAME}.mender
+  echo "::set-output name=path-to-artifact::${OUTPUT_PATH}/${ARTIFACT_NAME}.mender"
+  exit 0;
+else
+  echo "Artifact generation failed."
+  exit 1;
+fi

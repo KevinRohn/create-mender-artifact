@@ -35,8 +35,8 @@ inputs:
 
   
 outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  path-to-artifact: # 
+    description: 'The path to the generated mender artifact.'
 
 runs:
   using: 'docker'
