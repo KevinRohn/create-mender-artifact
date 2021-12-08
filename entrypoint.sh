@@ -63,10 +63,7 @@ for SCRIPT in $(ls $STATE_SCRIPTS/*); do
   SCRIPTS="${SCRIPTS} $SCRIPT"
 done
 
-echo "$SCRIPTS" | sed -e 's/ / -s /g'
-
-mender-artifact write module-image --type ${TYPE} --artifact-name ${ARTIFACT_NAME} --device-type ${DEVICE_TYPE} --output-path ${OUTPUT_PATH}/${ARTIFACT_NAME}.mender $(echo "$PACKAGES" | sed -e 's/ / -f /g') 
-
-ls -lah out/
+mender-artifact write module-image $(echo "$PACKAGES" | sed -e 's/ / -f /g') $(echo "$SCRIPTS" | sed -e 's/ / -f /g') \
+  --type ${TYPE} --artifact-name ${ARTIFACT_NAME} --device-type ${DEVICE_TYPE} --output-path ${OUTPUT_PATH}/${ARTIFACT_NAME}.mender
 
 echo "END"
