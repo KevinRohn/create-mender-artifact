@@ -13,7 +13,6 @@ See the [mender-artifact](https://docs.mender.io/3.1/artifact-creation/state-scr
 ### `artifact-name`
 
 _Description:_
-
 Name of the artifact
 
 _Required:_ *true*
@@ -21,7 +20,6 @@ _Required:_ *true*
 ### `device-type`
 
 _Description:_
-
 Type of device(s) supported by the Artifact. You can specify multiple compatible devices providing this parameter multiple times.
 
 _Required:_ *true*
@@ -29,7 +27,6 @@ _Required:_ *true*
 ### `type`
 
 _Description:_
-
 Type of payload. This is the same as the name of the update module.
 
 _Required:_ *true*
@@ -37,7 +34,6 @@ _Required:_ *true*
 ### `artifact-content`
 
 _Description:_
-
 Content for the artifact payload, based on the payload type.
 
 _Required:_ *true*
@@ -45,7 +41,6 @@ _Required:_ *true*
 ### `output-path`
 
 _Description:_
-
 Full path to output artifact file.
 
 _Required:_ *true*
@@ -53,18 +48,15 @@ _Required:_ *true*
 ### `state-scripts`
 
 _Description:_
-
 Full path to the state script(s). You can specify multiple scripts providing this parameter multiple times.
 
 _Required:_ *false*
-
 
 See mender documentation [state-scripts](https://docs.mender.io/artifact-creation/state-scripts) for more information.
 
 ### `software-name`
 
 _Description:_
-
 Name of the key to store the software version: rootfs-image.NAME.version, instead of rootfs-image.PAYLOAD_TYPE.version.
 
 _Required:_ *false*
@@ -72,11 +64,9 @@ _Required:_ *false*
 ### `software-version`
 
 _Description:_
-
 Value for the software version, defaults to the name of the artifact.
 
 _Required:_ *false*
-
 
 See mender documentation [software versioning](https://docs.mender.io/artifact-creation/software-versioning) for more information.
 
