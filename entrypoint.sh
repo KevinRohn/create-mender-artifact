@@ -56,13 +56,11 @@ fi
 PACKAGES=
 for PACKAGE in $(ls $ARTIFACT_CONTENT/*.deb); do
   PACKAGES="${PACKAGES} $PACKAGE"
-  echo "Found package `$PACKAGE` to use in mender-artifact."
 done
 
 SCRIPTS=
 for SCRIPT in $(ls $STATE_SCRIPTS/*); do
   SCRIPTS="${SCRIPTS} $SCRIPT"
-  echo "Found state-script `$SCRIPT` to use in mender-artifact."
 done
 
 mender-artifact write module-image \ 
