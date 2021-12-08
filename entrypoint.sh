@@ -63,7 +63,48 @@ for SCRIPT in $(ls $STATE_SCRIPTS/*); do
   SCRIPTS="${SCRIPTS} $SCRIPT"
 done
 
-mender-artifact write module-image $(echo "$PACKAGES" | sed -e 's/ / -f /g') $(echo "$SCRIPTS" | sed -e 's/ / -f /g') \
-  --type ${TYPE} --artifact-name ${ARTIFACT_NAME} --device-type ${DEVICE_TYPE} --output-path ${OUTPUT_PATH}/${ARTIFACT_NAME}.mender
 
-echo "END"
+check_dependency() {
+  if ! which "$1" > /dev/null; then
+    echo "The $1 utility is not found but required to generate Artifacts." 1>&2
+    return 1
+  fi
+}
+
+if ! check_dependency mender-artifact; then
+  echo "No mender-artifact installation found" 1>&2
+  exit 1
+fi
+
+check_sw_name() {
+  if [ -z "$SOFTWARE_NAME" ]; then
+    echo ""
+  else
+    echo "--software-name $(echo $SOFTWARE_NAME)"
+  fi
+}
+
+check_sw_version() {
+  if [ -z "$SOFTWARE_VERSION" ]; then
+    echo ""
+  else
+    echo "--software-version $(echo $SOFTWARE_VERSION)"
+  fi
+}
+
+sw_name=$(check_sw_name)
+sw_version=$(check_sw_version)
+
+echo $sw_name
+echo $sw_version
+
+mender-artifact write module-image $(echo "$PACKAGES" | sed -e 's/ / -f /g') $(echo "$SCRIPTS" | sed -e 's/ / -f /g') ${sw_name} ${sw_version} \
+  --type ${TYPE} \
+  --artifact-name ${ARTIFACT_NAME} \
+  --device-type ${DEVICE_TYPE} \
+  --output-path ${OUTPUT_PATH}/${ARTIFACT_NAME}.mender
+
+echo "Artifact ${OUTPUT_PATH}/${ARTIFACT_NAME}.mender generated successfully:"
+mender-artifact read ${OUTPUT_PATH}/${ARTIFACT_NAME}.mender
+
+exit 0;
