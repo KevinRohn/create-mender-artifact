@@ -33,7 +33,6 @@ inputs:
     description: 'Value for the software version, defaults to the name of the artifact'
     required: false
 
-  
 outputs:
   path-to-artifact: # 
     description: 'The path to the generated mender artifact.'

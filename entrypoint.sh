@@ -53,19 +53,8 @@ if [ ! -z "$8" ]; then
   echo "Software version $SOFTWARE_VERSION is set for mender-artifact creation."
 fi
 
-PACKAGES=
-for PACKAGE in $(ls $ARTIFACT_CONTENT/*.deb); do
-  PACKAGES="${PACKAGES} $PACKAGE"
-done
-
-SCRIPTS=
-for SCRIPT in $(ls $STATE_SCRIPTS/*); do
-  SCRIPTS="${SCRIPTS} $SCRIPT"
-done
-
-
 check_dependency() {
-  if ! which "$1" > /dev/null; then
+  if ! which "$1" >/dev/null; then
     echo "The $1 utility is not found but required to generate Artifacts." 1>&2
     return 1
   fi
@@ -95,6 +84,32 @@ check_sw_version() {
 sw_name=$(check_sw_name)
 sw_version=$(check_sw_version)
 
+PACKAGES=
+for PACKAGE in $(ls $ARTIFACT_CONTENT/*.deb); do
+  PACKAGES="${PACKAGES} $PACKAGE"
+done
+
+SCRIPTS=
+for SCRIPT in $(ls $STATE_SCRIPTS/*); do
+  SCRIPTS="${SCRIPTS} $SCRIPT"
+done
+
+# If there are multiple device types
+check_device_type() {
+  if [ $DEVICE_TYPE == *","* ]; then
+    DEVICE_TYPES=
+    for DEVICE in $(echo $DEVICE_TYPE | tr "," "\n"); do
+      DEVICE_TYPES="${$DEVICE_TYPE} $DEVICE"
+    done
+    echo "$(echo "$DEVICE_TYPES" | sed -e 's/ / --device-type /g')"
+  else
+    echo "--device-type $(echo $DEVICE_TYPE)"
+  fi
+}
+
+devices=$(check_device_type)
+echo $devices
+
 mender-artifact write module-image $(echo "$PACKAGES" | sed -e 's/ / -f /g') $(echo "$SCRIPTS" | sed -e 's/ / -f /g') ${sw_name} ${sw_version} \
   --type ${TYPE} \
   --artifact-name ${ARTIFACT_NAME} \
@@ -105,8 +120,8 @@ if [ -f "${OUTPUT_PATH}/${ARTIFACT_NAME}.mender" ]; then
   echo "Artifact ${OUTPUT_PATH}/${ARTIFACT_NAME}.mender generated successfully:"
   mender-artifact read ${OUTPUT_PATH}/${ARTIFACT_NAME}.mender
   echo "::set-output name=path-to-artifact::${OUTPUT_PATH}/${ARTIFACT_NAME}.mender"
-  exit 0;
+  exit 0
 else
   echo "Artifact generation failed."
-  exit 1;
+  exit 1
 fi
