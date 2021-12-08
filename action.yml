@@ -1,4 +1,5 @@
 name: 'Create Mender artifact module-image'
+author: Kevin Rohn
 description: 'Create an mender artifact file'
 inputs:
   artifact-name: 
@@ -10,11 +11,11 @@ inputs:
     required: true
 
   type: 
-    description: 'Type of payload. This is the same as the name of the update modul'
+    description: 'Type of payload. This is the same as the name of the update module.'
     required: true
 
   artifact-content:
-    description: 'Content for the artifact payload, based on the payload type'
+    description: 'Content for the artifact payload, based on the payload type.'
     required: true
 
   output-path: 
@@ -26,11 +27,11 @@ inputs:
     required: false
   
   software-name:
-    description: 'Name of the key to store the software version: rootfs-image.NAME.version, instead of rootfs-image.PAYLOAD_TYPE.version'
+    description: 'Name of the key to store the software version: rootfs-image.NAME.version, instead of rootfs-image.PAYLOAD_TYPE.version.'
     required: false
 
   software-version:
-    description: 'Value for the software version, defaults to the name of the artifact'
+    description: 'Value for the software version, defaults to the name of the artifact.'
     required: false
 
 outputs:

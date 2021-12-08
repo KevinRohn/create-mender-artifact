@@ -72,6 +72,7 @@ check_sw_name() {
     echo "--software-name $(echo $SOFTWARE_NAME)"
   fi
 }
+sw_name=$(check_sw_name)
 
 check_sw_version() {
   if [ -z "$SOFTWARE_VERSION" ]; then
@@ -80,9 +81,20 @@ check_sw_version() {
     echo "--software-version $(echo $SOFTWARE_VERSION)"
   fi
 }
-
-sw_name=$(check_sw_name)
 sw_version=$(check_sw_version)
+
+check_device_type() {
+  if [ $DEVICE_TYPE == *","* ]; then
+    DEVICE_TYPES=
+    for DEVICE in $(echo $DEVICE_TYPE | tr "," "\n"); do
+      DEVICE_TYPES="${$DEVICE_TYPE} $DEVICE"
+    done
+    echo "$(echo "$DEVICE_TYPES" | sed -e 's/ / --device-type /g')"
+  else
+    echo "--device-type $(echo $DEVICE_TYPE)"
+  fi
+}
+devices=$(check_device_type)
 
 PACKAGES=
 for PACKAGE in $(ls $ARTIFACT_CONTENT/*.deb); do
@@ -94,20 +106,6 @@ for SCRIPT in $(ls $STATE_SCRIPTS/*); do
   SCRIPTS="${SCRIPTS} $SCRIPT"
 done
 
-check_device_type() {
-  if [ $DEVICE_TYPE == *","* ]; then
-    DEVICE_TYPES=
-    for DEVICE in $(echo $DEVICE_TYPE | tr "," "\n"); do
-      DEVICE_TYPES="${$DEVICE_TYPE} $DEVICE"
-    done
-    echo "$(echo "$DEVICE_TYPES" | sed -e 's/ / --device-type /g')"
-  else
-    echo "THERE"
-    echo "--device-type $(echo $DEVICE_TYPE)"
-  fi
-}
-
-devices=$(check_device_type)
 
 mender-artifact write module-image $(echo "$PACKAGES" | sed -e 's/ / -f /g') $(echo "$SCRIPTS" | sed -e 's/ / -f /g') ${sw_name} ${sw_version} \
   --type ${TYPE} \
