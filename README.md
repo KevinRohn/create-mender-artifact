@@ -110,30 +110,30 @@ The path to the generated mender artifact.
 
 ## Progress
 
-| options | State |
-| ------- | --- |
-| --artifact-name | :white_check_mark: |
-| --device-type | :white_check_mark: |
-| --type | :white_check_mark: |
-| --artifact-name-depends |:x: |
-| --augment-file | :x: |
-| --augment-meta-data | :x: |
-| --augment-provides | :x: |
-| --augment-type | :x: |
-| --clears-provides | :x: |
-| --compression | :x: |
-| --depends | :x: |
-| --depends-groups |  :x: |
-| --file | :white_check_mark: |
-| --key | :x: |
-| --meta-data |  :x: |
-| --no-default-clears-provides | :x: |
-| --no-default-software-version | :x: |
-| --output-path | :white_check_mark: |
-| --provides | :x: |
-| --provides-group | :x: |
-| --script | :white_check_mark: |
-| --software-filesystem | :x: |
-| --software-name | :white_check_mark: |
-| --software-version | :white_check_mark: |
-| --version | :x: |
+| Options                       | State              |
+| ----------------------------- | ------------------ |
+| --artifact-name               | :white_check_mark: |
+| --device-type                 | :white_check_mark: |
+| --type                        | :white_check_mark: |
+| --artifact-name-depends       | :x:                |
+| --augment-file                | :x:                |
+| --augment-meta-data           | :x:                |
+| --augment-provides            | :x:                |
+| --augment-type                | :x:                |
+| --clears-provides             | :x:                |
+| --compression                 | :x:                |
+| --depends                     | :x:                |
+| --depends-groups              | :x:                |
+| --file                        | :white_check_mark: |
+| --key                         | :x:                |
+| --meta-data                   | :x:                |
+| --no-default-clears-provides  | :x:                |
+| --no-default-software-version | :x:                |
+| --output-path                 | :white_check_mark: |
+| --provides                    | :x:                |
+| --provides-group              | :x:                |
+| --script                      | :white_check_mark: |
+| --software-filesystem         | :x:                |
+| --software-name               | :white_check_mark: |
+| --software-version            | :white_check_mark: |
+| --version                     | :x:                |
