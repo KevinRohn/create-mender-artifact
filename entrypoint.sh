@@ -94,7 +94,6 @@ for SCRIPT in $(ls $STATE_SCRIPTS/*); do
   SCRIPTS="${SCRIPTS} $SCRIPT"
 done
 
-# If there are multiple device types
 check_device_type() {
   if [ $DEVICE_TYPE == *","* ]; then
     DEVICE_TYPES=
@@ -108,12 +107,11 @@ check_device_type() {
 }
 
 devices=$(check_device_type)
-echo $devices
 
 mender-artifact write module-image $(echo "$PACKAGES" | sed -e 's/ / -f /g') $(echo "$SCRIPTS" | sed -e 's/ / -f /g') ${sw_name} ${sw_version} \
   --type ${TYPE} \
   --artifact-name ${ARTIFACT_NAME} \
-  --device-type ${DEVICE_TYPE} \
+  ${devices} \
   --output-path ${OUTPUT_PATH}/${ARTIFACT_NAME}.mender
 
 if [ -f "${OUTPUT_PATH}/${ARTIFACT_NAME}.mender" ]; then
