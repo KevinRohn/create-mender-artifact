@@ -107,7 +107,7 @@ for SCRIPT in $(ls $STATE_SCRIPTS/*); do
 done
 
 
-mender-artifact write module-image $(echo "$PACKAGES" | sed -e 's/ / -f /g') $(echo "$SCRIPTS" | sed -e 's/ / -f /g') ${sw_name} ${sw_version} \
+mender-artifact write module-image $(echo "$PACKAGES" | sed -e 's/ / -f /g') $(echo "$SCRIPTS" | sed -e 's/ / -s /g') ${sw_name} ${sw_version} \
   --type ${TYPE} \
   --artifact-name ${ARTIFACT_NAME} \
   ${devices} \
