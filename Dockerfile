@@ -1,7 +1,7 @@
 
-FROM ubuntu
+FROM alpine:3.16
 
-RUN apt-get update && apt-get -y install curl bash
+RUN apk add --no-cache curl bash openssl1.1-compat
 
 RUN curl https://downloads.mender.io/mender-artifact/3.10.0/linux/mender-artifact --output /bin/mender-artifact
 RUN chmod +x /bin/mender-artifact
