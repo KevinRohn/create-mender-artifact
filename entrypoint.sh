@@ -60,7 +60,7 @@ check_dependency() {
   fi
 }
 
-if ! check_dependency mender-artifact; then
+if ! check_dependency /bin/mender-artifact; then
   echo "No mender-artifact installation found" 1>&2
   exit 1
 fi
@@ -107,16 +107,17 @@ for SCRIPT in $(ls $STATE_SCRIPTS/*); do
 done
 
 
-mender-artifact write module-image $(echo "$PACKAGES" | sed -e 's/ / -f /g') $(echo "$SCRIPTS" | sed -e 's/ / -s /g') ${sw_name} ${sw_version} \
+/bin/mender-artifact write module-image $(echo "$PACKAGES" | sed -e 's/ / -f /g') $(echo "$SCRIPTS" | sed -e 's/ / -s /g') ${sw_name} ${sw_version} \
   --type ${TYPE} \
   --artifact-name ${ARTIFACT_NAME} \
   ${devices} \
   --output-path ${OUTPUT_PATH}/${ARTIFACT_NAME}.mender
 
-if [ -f "${OUTPUT_PATH}/${ARTIFACT_NAME}.mender" ]; then
-  echo "Artifact ${OUTPUT_PATH}/${ARTIFACT_NAME}.mender generated successfully:"
-  mender-artifact read ${OUTPUT_PATH}/${ARTIFACT_NAME}.mender
-  echo "::set-output name=path-to-artifact::${OUTPUT_PATH}/${ARTIFACT_NAME}.mender"
+FILE_PATH=$(echo "${OUTPUT_PATH}/${ARTIFACT_NAME}.mender" | sed s#//*#/#g)
+if [ -f "$FILE_PATH" ]; then
+  echo "Artifact $FILE_PATH generated successfully:"
+  mender-artifact read $FILE_PATH
+  echo "path-to-artifact=$FILE_PATH" >> $GITHUB_OUTPUT
   exit 0
 else
   echo "Artifact generation failed."
